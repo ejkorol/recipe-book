@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 
 /* ROUTES */
-import oreRoutes from './routes/oreRoutes';
+import itemRoutes from './routes/itemRoutes';
 
 /* ********************************** */
 /*              ENV CONFIG            */
@@ -23,7 +23,7 @@ app.use(express.static('public'));
 /* ********************************** */
 /*                ROUTES              */
 /* ********************************** */
-app.use('/ores', oreRoutes);
+app.use('/api/items', itemRoutes);
 
 /* SERVE ~ */
 app.listen(PORT, () => {
