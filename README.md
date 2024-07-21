@@ -45,6 +45,7 @@ An open-source API for managing recipes, built with Express and TypeScript using
 
 ## Project Structure
 
+```
 recipe-book/
 ├── src/
 │ ├── controllers/
@@ -58,6 +59,8 @@ recipe-book/
 │ └── api.ts
 ├── dist/
 │ └── ...
+├── types/
+│ └── ...
 ├── .gitignore
 ├── .env
 ├── .env.sample
@@ -65,12 +68,14 @@ recipe-book/
 ├── package.json
 ├── tsconfig.json
 └── README.md
+```
 
 - **`src/controllers/`**: Manages request processing and response generation
 - **`src/services/`**: Contains business logic and operations
 - **`src/routes/`**: Maps HTTP requests to controller functions
 - **`src/utils/`**: Provides utility functions and configurations
-- **`dist/`**: Compiled JavaScript files.
+- **`types/`**: For organizing types (always prefaced with I<type> and exported from singular `index`)
+- **`dist/`**: Compiled JavaScript files
 
 ## Development
 
