@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { ItemSchema } from "../schemas/itemSchema";
 
 import {
@@ -6,21 +6,33 @@ import {
   postItem as postItemService
 } from "../services/itemService";
 
-export const getAllItems = async (_req: Request, res: Response) => {
+export const getAllItems = async (
+  _req: Request,
+  res: Response,
+  next: NextFunction) => {
+
   try {
     const items = await getAllItemsService();
     res.json(items);
-  } catch (e: any) {
-    res.status(500).json({ error: e.message });
+
+  } catch (e) {
+    next(e);
   };
+
 };
 
-export const postItem = async (req: Request, res: Response) => {
+export const postItem = async (
+  req: Request,
+  res: Response,
+  next: NextFunction) => {
+
   try {
     const itemData = ItemSchema.parse(req.body);
     const item = await postItemService(itemData);
     res.json(item);
-  } catch (e: any) {
-    res.status(500).json({ error: e.message });
+
+  } catch (e) {
+    next(e);
   };
+
 };
