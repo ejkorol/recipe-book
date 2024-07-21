@@ -1,16 +1,29 @@
 import prisma from "../utils/prismaClient";
-import { DatabaseError, UnknownError } from "../utils/errors";
-import { isError } from "../utils/typeGuards";
+import { handleError } from "../utils/typeGuards";
 import { ItemAttribute } from "@prisma/client";
+import { IItemAttribute } from "../../types/item";
 
 export const getAllAttributes = async (): Promise<ItemAttribute[]> => {
   try {
     const attributes = await prisma.itemAttribute.findMany();
     return attributes;
   } catch (e: unknown) {
-    if (isError(e)) {
-      throw new DatabaseError(`Failed to fetch items: ${e.message}`);
-    };
-    throw new UnknownError();
+    throw handleError(e);
+  };
+};
+
+export const postAttribute = async (attributeData: IItemAttribute): Promise<ItemAttribute> => {
+  try {
+
+    const attribute = await prisma.itemAttribute.create({
+      data: {
+        name: attributeData.name,
+        description: attributeData.description
+      },
+    });
+
+    return attribute;
+  } catch (e: unknown) {
+    throw handleError(e);
   };
 };
