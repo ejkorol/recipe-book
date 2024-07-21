@@ -8,35 +8,78 @@ datasource db {
 }
 
 model Item {
-  id            String   @id @default(uuid()) @unique
-  name          String
-  description   String?
-  image         String?
+  id             String  @id @unique @default(uuid())
+  name           String  @db.VarChar(255)
+  description    String  @db.Text()
+  image          String  @db.VarChar(255)
+  itemTypeId     String
+  stackSize      Int
+  durability     Int?
+  isMineable     Boolean @default(false)
+  requiredToolId String?
 
-  drops         Drop[]   @relation("ItemDrops")
-  ores          Ore[]    @relation("ItemOres")
+  attributes ItemAttributeValue[]
+  recipes    CraftingRecipeIngredient[]
+
+  itemType       ItemType         @relation("ItemType", fields: [itemTypeId], references: [id])
+  requiredTool   ItemType?        @relation("RequiredTool", fields: [requiredToolId], references: [id])
+  CraftingRecipe CraftingRecipe[]
 
   @@map("items")
 }
 
-model Drop {
-  id            String   @id @default(uuid()) @unique
-  itemId        String
-  item          Item      @relation("ItemDrops", fields: [itemId], references: [id])
-  quantity      Int
+model ItemType {
+  id          String  @id @unique @default(uuid())
+  name        String  @db.VarChar(255)
+  description String? @db.Text()
 
-  @@map("drops")
+  items         Item[] @relation("ItemType")
+  requiredItems Item[] @relation("RequiredTool")
+
+  @@map("item_types")
 }
 
-model Ore {
-  id              String   @id @default(uuid()) @unique
-  hardness        Float
-  blastResistance Float
-  toolRequired    String
-  minableWith     Json
+model ItemAttribute {
+  id          String @id @unique @default(uuid())
+  name        String @db.VarChar(255)
+  description String @db.Text()
 
-  itemId          String
-  item            Item    @relation("ItemOres", fields: [itemId], references: [id])
+  values ItemAttributeValue[]
 
-  @@map("ores")
+  @@map("item_attributes")
+}
+
+model ItemAttributeValue {
+  id          String @id @unique @default(uuid())
+  itemId      String
+  attributeId String
+  value       Int
+
+  item      Item          @relation(fields: [itemId], references: [id])
+  attribute ItemAttribute @relation(fields: [attributeId], references: [id])
+
+  @@map("item_attribute_values")
+}
+
+model CraftingRecipe {
+  id           String @id @unique @default(uuid())
+  resultItemId String
+  quantity     Int
+
+  resultItem  Item                       @relation(fields: [resultItemId], references: [id])
+  ingredients CraftingRecipeIngredient[]
+
+  @@map("crafting_recipes")
+}
+
+model CraftingRecipeIngredient {
+  id       String @id @unique @default(uuid())
+  recipeId String
+  itemId   String
+  quantity Int
+
+  recipe CraftingRecipe @relation(fields: [recipeId], references: [id])
+  item   Item           @relation(fields: [itemId], references: [id])
+
+  @@map("crafting_recipe_ingredients")
 }
