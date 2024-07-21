@@ -1,4 +1,6 @@
-
+/*
+ * generic errors
+*/
 export class ApiError extends Error {
   public statusCode: number;
 
@@ -9,6 +11,10 @@ export class ApiError extends Error {
   };
 };
 
+
+/*
+ * 404 errors
+*/
 export class NotFoundError extends ApiError {
   constructor(message: string = "Not Found") {
     super(message, 404);
@@ -16,6 +22,9 @@ export class NotFoundError extends ApiError {
   };
 };
 
+/*
+ * database related errors
+*/
 export class DatabaseError extends ApiError {
   constructor(message: string = "Database Error") {
     super(message, 500);
@@ -23,6 +32,9 @@ export class DatabaseError extends ApiError {
   };
 };
 
+/*
+ * uncaught errors
+*/
 export class UnknownError extends ApiError {
   constructor(message: string = "Unknown Error") {
     super(message, 500);
