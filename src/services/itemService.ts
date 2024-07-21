@@ -1,6 +1,5 @@
 import prisma from "../utils/prismaClient";
-import { DatabaseError, UnknownError } from "../utils/errors";
-import { isError } from "../utils/typeGuards";
+import { handleError } from "../utils/typeGuards";
 import { IItem } from "../../types/item";
 import { Item } from "@prisma/client";
 
@@ -9,10 +8,7 @@ export const getAllItems = async (): Promise<Item[]> => {
     const items = await prisma.item.findMany({});
     return items;
   } catch (e: unknown) {
-    if (isError(e)) {
-      throw new DatabaseError(`Failed to fetch items: ${e.message}`);
-    };
-    throw new UnknownError();
+    throw handleError(e);
   };
 };
 
@@ -75,9 +71,6 @@ export const postItem = async (itemData: IItem): Promise<Item> => {
 
     return item;
   } catch (e: unknown) {
-    if (isError(e)) {
-      throw new DatabaseError(`Failed to post items: ${e.message}`);
-    };
-    throw new UnknownError();
+    throw handleError(e);
   };
 };

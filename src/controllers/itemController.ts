@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { ItemSchema } from "../schemas/itemSchema";
+import { handleError } from "../utils/typeGuards";
 
 import {
   getAllItems as getAllItemsService,
@@ -16,7 +17,7 @@ export const getAllItems = async (
     res.json(items);
 
   } catch (e) {
-    next(e);
+    next(handleError(e));
   };
 
 };
@@ -32,7 +33,7 @@ export const postItem = async (
     res.json(item);
 
   } catch (e) {
-    next(e);
+    next(handleError(e));
   };
 
 };
