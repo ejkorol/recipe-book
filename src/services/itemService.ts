@@ -1,4 +1,5 @@
 import prisma from "../utils/prismaClient";
+import { handleError } from "../utils/typeGuards";
 import { IItem } from "../../types/item";
 import { Item } from "@prisma/client";
 
@@ -6,11 +7,8 @@ export const getAllItems = async (): Promise<Item[]> => {
   try {
     const items = await prisma.item.findMany({});
     return items;
-  } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(`Failed to fetch items: ${e.message}`);
-    };
-    throw new Error("Failed to fetch items: Unknown error");
+  } catch (e: unknown) {
+    throw handleError(e);
   };
 };
 
@@ -72,10 +70,7 @@ export const postItem = async (itemData: IItem): Promise<Item> => {
     });
 
     return item;
-  } catch (e) {
-    if (e instanceof Error) {
-      throw new Error(`Failed to post item: ${e.message}`);
-    };
-    throw new Error("Failed to post item: Unknown error");
+  } catch (e: unknown) {
+    throw handleError(e);
   };
 };

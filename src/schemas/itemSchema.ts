@@ -21,6 +21,6 @@ const ItemSchema = z.object({
   requiredToolId: z.string().uuid().nullable(),
   attributes: z.array(ItemAttributeValueSchema).optional(),
   recipes: z.array(CraftingRecipeSchema).optional()
-});
+}).strict();
 
 export { ItemSchema };
