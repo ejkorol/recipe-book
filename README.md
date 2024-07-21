@@ -2,6 +2,14 @@
 
 An open-source API for managing recipes, built with Express and TypeScript using Prisma.
 
+#### Quick Nav
+- [Installation](#installation)
+- [Config](#config)
+- [Project Architecture](#project-structure)
+- [Running the Api](#development)
+- [API documentation](#api-documentation)
+
+
 ## Installation
 
 1. **Clone the repository:**
@@ -85,117 +93,9 @@ To start the development server with automatic reloading, run:
     npm run dev
     ```
 
-# Minecraft Item Categories
+# API Documentation
 
-## 1. Raw Ingredients
-
-- **Ores**: 
-  - Iron Ore
-  - Gold Ore
-  - Coal Ore
-
-- **Raw Materials:**
-  - Raw Iron
-  - Raw Gold
-
-- **Plant-Based**: 
-  - Wheat
-  - Sugar Cane
-  - Cocoa Beans
-  - Seeds
-
-- **Animal Products**: 
-  - Raw Beef
-  - Raw Porkchop
-  - Raw Chicken
-  - Eggs
-
-## 2. Processed Ingredients
-
-- **Crafted Items**: 
-  - Iron Ingot
-  - Gold Ingot
-  - Coal
-  - Bread
-  - Cooked Beef
-
-- **Crafting Materials**: 
-
-  - Wood Planks
-  - Stone Bricks
-  - Iron Bars
-  - Glass
-
-- **Food**: 
-  - Cooked Porkchop
-  - Cooked Chicken
-  - Cake
-
-## 3. Building & Decoration
-
-- **Blocks**: 
-  - Stone
-  - Wood Planks
-  - Bricks
-  - Sandstone
-
-- **Decoration**: 
-  - Flower Pots
-  - Paintings
-  - Carpets
-  - Lanterns
-
-## 4. Tools & Weapons
-
-- **Tools**: 
-  - Pickaxes
-  - Shovels
-  - Axes
-  - Bows
-
-- **Weapons**: 
-  - Swords
-  - Crossbows
-  - Tridents
-
-## 5. Armor
-
-- **Protective Gear**: 
-  - Helmets
-  - Chestplates
-  - Leggings
-  - Boots
-
-## 7. Brewing & Potions
-
-- **Brewing Ingredients**: 
-  - Blaze Powder
-  - Nether Wart
-  - Glass Bottles
-
-- **Potions**: 
-  - Healing Potions
-  - Speed Potions
-  - Strength Potions
-
-## 8. Miscellaneous
-
-- **Other Items**: 
-  - Maps
-  - Compasses
-  - Name Tags
-  - Spawn Eggs
-
-- **Music Discs**: 
-  - Cat
-  - Blocks
-  - 13
-  - Chirp
-
-## 9. Transportation
-
-- **Transport Items**: 
-  - Boats
-  - Minecarts
-  - Rails
-  - Elytra
+#### Table of Contents
+- [Items](./docs/api/items/post-items.md)
+- [Item Types](./docs/api/types/post-types.md)
+- [Item Attributes](./docs/api/attributes/post-attributes.md)
