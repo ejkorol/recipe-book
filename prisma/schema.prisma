@@ -6,3 +6,30 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model Ore {
+  id                Int                 @id @default(autoincrement())
+  name              String
+  type              String
+  description       String
+  hardness          Float
+  blastResistance   Float
+  toolRequired      String
+  minableWith       Json
+  drops             Drop[]
+  texture           String
+  color             String
+
+  @@map("ores")
+}
+
+model Drop {
+  id                Int     @id @default(autoincrement())
+  oreId             Int
+  item              String
+  quantity          Int
+
+  ore               Ore     @relation(fields: [oreId], references: [id])
+
+  @@map("drops")
+}

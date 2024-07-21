@@ -6,14 +6,14 @@ An open-source API for managing recipes, built with Express and TypeScript using
 
 1. **Clone the repository:**
 
-    ```bash
+    ```
     git clone <repository-url>
     cd recipe-book
     ```
 
 2. **Install dependencies:**
 
-    ```bash
+    ```
     npm install
     ```
 
@@ -21,74 +21,75 @@ An open-source API for managing recipes, built with Express and TypeScript using
 
     1. **Create a `.env` file in the root directory and add the `DATABASE_URL` variable:**
 
-       ```env
-       DATABASE_URL="mysql://username:password@localhost:3306/mydatabase"
-       ```
+    ```
+    DATABASE_URL="mysql://username:password@localhost:3306/mydatabase"
+    ```
 
     2. **Generate the Prisma client:**
 
-       ```bash
-       npx prisma generate
-       ```
+    ```
+    npx prisma generate
+    ```
 
     3. **Run migrations to set up the database schema:**
 
-       ```bash
-       npx prisma migrate dev --name init
-       ```
+    ```
+    npx prisma migrate dev
+    ```
 
-## Configuration
+## Config
 
-- **`.env` file**: Store environment variables, including `DATABASE_URL` for Prisma and `PORT` for the server.
+- **`.env` file**: Store environment variables
   
-- **`src/api.ts`**: Entry point for the application; sets up the Express server, middleware, and routes.
+- **`src/api.ts`**: Entry point
 
 ## Project Structure
 
 recipe-book/
 ├── src/
 │ ├── controllers/
-│ │ └── recipeController.ts
-│ ├── models/
-│ │ └── recipeModel.ts
+│ │ └── fooController.ts
 │ ├── services/
-│ │ └── recipeService.ts
+│ │ └── fooService.ts
 │ ├── routes/
-│ │ └── recipeRoutes.ts
+│ │ └── fooRoutes.ts
 │ ├── utils/
-│ │ └── database.ts
-│ ├── api.ts
-│ └── config.ts
+│ │ └── prismaClient.ts
+│ └── api.ts
 ├── dist/
 │ └── ...
+├── .gitignore
 ├── .env
+├── .env.sample
+├── package-lock.json
 ├── package.json
 ├── tsconfig.json
 └── README.md
 
-- **`src/controllers/`**: Manages request processing and response generation (e.g., `recipeController.ts`).
-- **`src/models/`**: Defines data schema and database interactions using Prisma (e.g., `recipeModel.ts`).
-- **`src/services/`**: Contains business logic and operations (e.g., `recipeService.ts`).
-- **`src/routes/`**: Maps HTTP requests to controller functions (e.g., `recipeRoutes.ts`).
-- **`src/utils/`**: Provides utility functions and configurations (e.g., `database.ts`).
+- **`src/controllers/`**: Manages request processing and response generation
+- **`src/services/`**: Contains business logic and operations
+- **`src/routes/`**: Maps HTTP requests to controller functions
+- **`src/utils/`**: Provides utility functions and configurations
 - **`dist/`**: Compiled JavaScript files.
 
 ## Development
 
 To start the development server with automatic reloading, run:
 
-```bash
-npm run dev
-```
+    ```
+    npm run dev
+    ```
 
 # Minecraft Item Categories
 
 ## 1. Raw Ingredients
 
-- **Ores & Raw Materials**: 
+- **Ores**: 
   - Iron Ore
   - Gold Ore
   - Coal Ore
+
+- **Raw Materials:**
   - Raw Iron
   - Raw Gold
 
@@ -159,18 +160,6 @@ npm run dev
   - Chestplates
   - Leggings
   - Boots
-
-## 6. Redstone Components
-
-- **Basic Components**: 
-  - Redstone Dust
-  - Levers
-  - Pressure Plates
-
-- **Advanced Components**: 
-  - Pistons
-  - Hoppers
-  - Comparators
 
 ## 7. Brewing & Potions
 

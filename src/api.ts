@@ -1,19 +1,31 @@
-import express from "express";
+import express from 'express';
 import dotenv from 'dotenv';
 
-/* ENV CONFIG */
+/* ROUTES */
+import oreRoutes from './routes/oreRoutes';
+
+/* ********************************** */
+/*              ENV CONFIG            */
+/* ********************************** */
 dotenv.config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 /* CONFIG */
-const api = express();
+const app = express();
 
-/* ************************** */
-/*         MIDDLEWARE         */
-/* ************************** */
-api.use(express.json());
+/* ********************************** */
+/*              MIDDLEWARE            */
+/* ********************************** */
+app.use(express.json());
+app.use(express.static('public'));
 
-/* SERVER */
-api.listen(PORT, () => {
+
+/* ********************************** */
+/*                ROUTES              */
+/* ********************************** */
+app.use('/ores', oreRoutes);
+
+/* SERVE ~ */
+app.listen(PORT, () => {
   console.log(`API is listening on port: ${PORT}`);
 });
