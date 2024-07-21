@@ -1,12 +1,11 @@
 import express from 'express';
 import dotenv from 'dotenv';
 
+/* ROUTES */
+import routes from "./routes"
+
 /* MIDDLEWARE */
 import { errorHandler } from './middleware/errorHandler';
-
-/* ROUTES */
-import itemRoutes from './routes/itemRoutes';
-import attributeRoutes from './routes/attributeRoutes';
 
 /* ********************************** */
 /*              ENV CONFIG            */
@@ -15,25 +14,19 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 /* CONFIG */
-const app = express();
+const api = express();
 
 /* ********************************** */
 /*              MIDDLEWARE            */
 /* ********************************** */
-app.use(express.json());
-app.use(express.static('public'));
-
-
-/* ********************************** */
-/*                ROUTES              */
-/* ********************************** */
-app.use('/api/items', itemRoutes);
-app.use('/api/attributes', attributeRoutes);
+api.use(express.json());
+api.use(express.static('public'));
+api.use(routes);
 
 /* ********************************** */
 /*           ERROR HANDLER            */
 /* ********************************** */
-app.use(errorHandler);
+api.use(errorHandler);
 
 /*
  * Error handler middleware must be declared after all routes
@@ -41,6 +34,6 @@ app.use(errorHandler);
 */
 
 /* SERVE ~ */
-app.listen(PORT, () => {
+api.listen(PORT, () => {
   console.log(`API is listening on port: ${PORT}`);
 });
