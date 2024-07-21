@@ -7,29 +7,36 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Ore {
-  id                Int                 @id @default(autoincrement())
-  name              String
-  type              String
-  description       String
-  hardness          Float
-  blastResistance   Float
-  toolRequired      String
-  minableWith       Json
-  drops             Drop[]
-  texture           String
-  color             String
+model Item {
+  id            String   @id @default(uuid()) @unique
+  name          String
+  description   String?
+  image         String?
 
-  @@map("ores")
+  drops         Drop[]   @relation("ItemDrops")
+  ores          Ore[]    @relation("ItemOres")
+
+  @@map("items")
 }
 
 model Drop {
-  id                Int     @id @default(autoincrement())
-  oreId             Int
-  item              String
-  quantity          Int
-
-  ore               Ore     @relation(fields: [oreId], references: [id])
+  id            String   @id @default(uuid()) @unique
+  itemId        String
+  item          Item      @relation("ItemDrops", fields: [itemId], references: [id])
+  quantity      Int
 
   @@map("drops")
+}
+
+model Ore {
+  id              String   @id @default(uuid()) @unique
+  hardness        Float
+  blastResistance Float
+  toolRequired    String
+  minableWith     Json
+
+  itemId          String
+  item            Item    @relation("ItemOres", fields: [itemId], references: [id])
+
+  @@map("ores")
 }
