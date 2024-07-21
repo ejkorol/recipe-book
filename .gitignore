@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# TypeScript configuration
+*.tsbuildinfo
+
+# Environment variables
+.env
+
+# Prisma
+prisma/migrations/
+prisma/dev.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userossc
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Miscellaneous
+*.swp
+*.swo

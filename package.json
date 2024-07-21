@@ -1,0 +1,29 @@
+{
+  "name": "recipe-book",
+  "version": "1.0.0",
+  "description": "An open-source Minecraft API",
+  "type": "module",
+  "main": "dist/api.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node --loader ts-node/esm dist/api.js",
+    "dev": "node --loader ts-node/esm src/api.ts",
+    "dev:watch": "nodemon --watch src --exec 'node --loader ts-node/esm' src/api.ts"
+  },
+  "keywords": [],
+  "author": "Jason Korol",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.17.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.11",
+    "nodemon": "^3.1.4",
+    "prisma": "^5.17.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  }
+}
