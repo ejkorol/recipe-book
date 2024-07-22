@@ -4,7 +4,8 @@ import { handleError } from "../utils/typeGuards";
 
 import {
   getAllAttributes as getAllAttributesService,
-  postAttribute as postAttributeService
+  postAttribute as postAttributeService,
+  deleteAttribute as deleteAttributeService
 } from "../services/attributeService";
 
 export const getAllAttributes = async (
@@ -36,3 +37,18 @@ export const postAttribute = async (
   };
 
 };
+
+export const deleteAttribute = async (
+  req: Request, 
+  res: Response, 
+  next: NextFunction) => {
+
+  try {
+    const { id } = req.params;
+    const deletedAttribute = await deleteAttributeService(id);
+    res.json(deletedAttribute);
+  } catch (e) {
+    next(handleError(e));
+  };
+
+}

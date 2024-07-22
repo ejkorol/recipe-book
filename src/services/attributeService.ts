@@ -27,3 +27,18 @@ export const postAttribute = async (attributeData: IItemAttribute): Promise<Item
     throw handleError(e);
   };
 };
+
+
+export const deleteAttribute = async (id: string): Promise<ItemAttribute> => {
+  try {
+    const deletedAttribute = await prisma.itemAttribute.delete({
+      where: {
+        id: id
+      }
+    });
+
+    return deletedAttribute;
+  } catch (e: unknown) {
+    throw handleError(e);
+  };
+};
