@@ -5,7 +5,8 @@ import { handleError } from "../utils/typeGuards";
 import {
   getAllAttributes as getAllAttributesService,
   postAttribute as postAttributeService,
-  deleteAttribute as deleteAttributeService
+  deleteAttribute as deleteAttributeService,
+  updateAttribute as updateAttributeService
 } from "../services/attributeService";
 
 export const getAllAttributes = async (
@@ -52,3 +53,17 @@ export const deleteAttribute = async (
   };
 
 }
+
+export const updateAttribute = async (
+  req: Request, 
+  res: Response,
+  next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const attributeData = ItemAttributeSchema.parse(req.body);
+    const updatedAttribute = await updateAttributeService(id, attributeData);
+    res.json(updatedAttribute);
+  } catch (e) {
+    next(handleError(e));
+  };
+  }

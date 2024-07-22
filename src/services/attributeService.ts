@@ -42,3 +42,18 @@ export const deleteAttribute = async (id: string): Promise<ItemAttribute> => {
     throw handleError(e);
   };
 };
+
+export const updateAttribute = async (id: string, attributeData: IItemAttribute): Promise<ItemAttribute> => {
+  try {
+    const updatedAttribute = await prisma.itemAttribute.update({
+      where: {
+        id: id
+      },
+      data: {...attributeData}
+    });
+
+    return updatedAttribute;
+  } catch (e: unknown) {
+    throw handleError(e);
+  };
+}
