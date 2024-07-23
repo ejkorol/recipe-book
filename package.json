@@ -6,7 +6,8 @@
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/api.js",
-    "dev": "nodemon src/api.ts"
+    "dev": "nodemon src/api.ts",
+    "seed": "ts-node ./src/seed/seed.ts"
   },
   "dependencies": {
     "@prisma/client": "^5.17.0",
