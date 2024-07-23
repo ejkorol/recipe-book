@@ -210,4 +210,5 @@ To start the development server with automatic reloading, run:
 # API Documentation
 
 #### Table of Contents
+- [Recipes](./docs/api/recipes.md)
 - [Foodstuffs](./docs/api/foods.md)
