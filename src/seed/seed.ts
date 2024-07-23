@@ -7,9 +7,9 @@ import {
   items,
   materials,
   recipes
-} from "./scripts/1.19/index"
+} from "./scripts/1.20.2/index"
 
-const version = "1.19";
+const version = "1.20.2";
 const paths = data[version].files
 
 const main = async () => {
