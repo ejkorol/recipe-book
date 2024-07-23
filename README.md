@@ -15,22 +15,22 @@ An open-source API for managing recipes, built with Express and TypeScript using
 
 ### SSH
 
-    ```bash
-    $ git clone git@github.com:ejkorol/recipe-book.git
-    ```
+```bash
+$ git clone git@github.com:ejkorol/recipe-book.git
+```
 
 ### HTTPS
 
-    ```bash
-    $ git clone https://github.com/ejkorol/recipe-book.git
-    ```
+```bash
+$ git clone https://github.com/ejkorol/recipe-book.git
+```
 
 2. **Install dependencies**
 
-    ```
-    $ cd recipe-book
-    $ npm install
-    ```
+```bash
+$ cd recipe-book
+$ npm install
+```
 
 3. **Set up ENV variables**
 
@@ -201,9 +201,9 @@ recipe-book/
 
 To start the development server with automatic reloading, run:
 
-    ```bash
-    $ npm run dev
-    ```
+```bash
+$ npm run dev
+```
 
 > Ensure that you have correctly performed the [Installation](#installation).
 
