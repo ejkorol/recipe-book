@@ -1,12 +1,16 @@
 import { Request, Response, NextFunction } from "express";
 import { handleError } from "../utils/typeGuards";
+import {
+  MissingParameterError,
+  NotFoundError,
+  ValidationError
+} from "../utils/errors";
 
 import {
   getAllFood as getAllFoodService,
   getFoodById as getFoodByIdService,
   searchFood as searchFoodService
 } from "../services/foodService";
-import { MissingParameterError, NotFoundError, ValidationError } from "../utils/errors";
 
 export const getAllFood = async (
   _req: Request,
@@ -55,17 +59,17 @@ export const searchFood = async (
     const query = req.query.q as string;
 
     if (!query) {
-      throw new MissingParameterError("Query paramater 'q' is required.")
+      throw new MissingParameterError("Query paramater 'q' is required.");
     };
 
     const foods = await searchFoodService(query);
 
     if (foods.length === 0) {
-      throw new NotFoundError(`No food items with: ${query}`)
-    }
+      throw new NotFoundError(`No food items with: ${query}`);
+    };
 
     res.json(foods);
   } catch (e) {
     next(handleError(e));
   };
-}
+};
