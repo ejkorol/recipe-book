@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 
+/* RATE LIMITER */
+import { apiLimiter } from './middleware/rateLimiter';
+
 /* ROUTES */
 import routes from "./routes"
 
@@ -20,6 +23,11 @@ const api = express();
 /* ********************************** */
 /*              MIDDLEWARE            */
 /* ********************************** */
+
+/* ENABLE RATE LIMITER IN PROD */
+if (process.env.NODE_ENV === 'production') {
+  api.use(apiLimiter);
+};
 
 /* CORS W/ DEFAULT */
 api.use(cors());
