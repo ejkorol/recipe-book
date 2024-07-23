@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
 
 /* ROUTES */
@@ -19,6 +20,10 @@ const api = express();
 /* ********************************** */
 /*              MIDDLEWARE            */
 /* ********************************** */
+
+/* CORS W/ DEFAULT */
+api.use(cors());
+
 api.use(express.json());
 api.use(express.static('public'));
 api.use(routes);
