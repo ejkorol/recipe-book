@@ -7,79 +7,95 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Block {
+  id            Int           @id
+  name          String
+  displayName   String
+  hardness      Float
+  resistance    Float
+  stackSize     Int
+  diggable      Boolean
+  material      String
+  transparent   Boolean
+  emitLight     Int
+  filterLight   Int
+  defaultState  Int
+  minStateId    Int
+  maxStateId    Int
+  boundingBox   String
+  states        Json?
+  drops         Json?
+  harvestTools  Json?
+
+  @@map("blocks")
+}
+
+model Food {
+  id                Int           @id
+  name              String
+  stackSize         Int
+  displayName       String
+  foodPoints        Int
+  saturation        Float
+  effectiveQuality  Float
+  saturationRatio   Float
+
+  @@map("foods")
+}
+
+model Biome {
+  id                Int           @id
+  name              String
+  category          String
+  temperature       Float
+  precipitation     String
+  dimension         String
+  displayName       String
+  color             Int
+  rainfall          Float
+
+  @@map("biomes")
+}
+
+model Entity {
+  id                Int           @id
+  internalId        Int
+  name              String
+  displayName       String
+  width             Float
+  height            Float
+  type              String
+  category          String
+
+  @@map("entities")
+}
+
 model Item {
-  id             String  @id @unique @default(uuid())
-  name           String  @db.VarChar(255)
-  description    String  @db.Text()
-  image          String  @db.VarChar(255)
-  itemTypeId     String
-  stackSize      Int
-  durability     Int?
-  isMineable     Boolean @default(false)
-  requiredToolId String?
-
-  attributes ItemAttributeValue[]
-  recipes    CraftingRecipeIngredient[]
-
-  itemType       ItemType         @relation("ItemType", fields: [itemTypeId], references: [id])
-  requiredTool   ItemType?        @relation("RequiredTool", fields: [requiredToolId], references: [id])
-  CraftingRecipe CraftingRecipe[]
+  id                Int           @id
+  name              String
+  displayName       String
+  stackSize         Int
+  enchantCategories Json?
+  repairWith        Json?
+  maxDurability     Int?
 
   @@map("items")
 }
 
-model ItemType {
-  id          String  @id @unique @default(uuid())
-  name        String  @db.VarChar(255)
-  description String? @db.Text()
+model Material {
+  id                String        @id
+  name              String
+  data              Json?
 
-  items         Item[] @relation("ItemType")
-  requiredItems Item[] @relation("RequiredTool")
-
-  @@map("item_types")
+  @@map("materials")
 }
 
-model ItemAttribute {
-  id          String @id @unique @default(uuid())
-  name        String @db.VarChar(255)
-  description String @db.Text()
+model Recipe {
+  id                Int           @id @default(autoincrement())
+  ingredients       Json?
+  recipe            Json?
+  result            Int
+  quantity          Int
 
-  values ItemAttributeValue[]
-
-  @@map("item_attributes")
-}
-
-model ItemAttributeValue {
-  id          String @id @unique @default(uuid())
-  itemId      String
-  attributeId String
-  value       Int
-
-  item      Item          @relation(fields: [itemId], references: [id])
-  attribute ItemAttribute @relation(fields: [attributeId], references: [id])
-
-  @@map("item_attribute_values")
-}
-
-model CraftingRecipe {
-  id           String @id @unique @default(uuid())
-  resultItemId String
-  quantity     Int
-
-  resultItem  Item                       @relation(fields: [resultItemId], references: [id])
-  ingredients CraftingRecipeIngredient[]
-
-  @@map("crafting_recipes")
-}
-
-model CraftingRecipeIngredient {
-  id       String @id @unique @default(uuid())
-  recipeId String
-  itemId   String
-  quantity Int
-
-  recipe CraftingRecipe @relation(fields: [recipeId], references: [id])
-  item   Item           @relation(fields: [itemId], references: [id])
-
-  @@map("crafting_recipe_ingredients")
+  @@map("recipes")
 }
