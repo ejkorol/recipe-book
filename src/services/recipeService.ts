@@ -85,7 +85,6 @@ export const getRecipe = async (query: number): Promise<IRecipe[]> => {
         recipeList.push(r);
       };
     };
-    console.log(recipeList)
     return recipeList;
   } catch (e: unknown) {
     throw handleError(e);
