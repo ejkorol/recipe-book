@@ -1,8 +1,15 @@
 import express from 'express';
+import cors from 'cors';
 import dotenv from 'dotenv';
 
+/* RATE LIMITER */
+import { apiLimiter } from './middleware/rateLimiter';
+
 /* ROUTES */
-import oreRoutes from './routes/oreRoutes';
+import routes from "./routes"
+
+/* MIDDLEWARE */
+import { errorHandler } from './middleware/errorHandler';
 
 /* ********************************** */
 /*              ENV CONFIG            */
@@ -11,21 +18,35 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 /* CONFIG */
-const app = express();
+const api = express();
 
 /* ********************************** */
 /*              MIDDLEWARE            */
 /* ********************************** */
-app.use(express.json());
-app.use(express.static('public'));
 
+/* ENABLE RATE LIMITER IN PROD */
+if (process.env.NODE_ENV === 'production') {
+  api.use(apiLimiter);
+};
+
+/* CORS W/ DEFAULT */
+api.use(cors());
+
+api.use(express.json());
+api.use(express.static('public'));
+api.use(routes);
 
 /* ********************************** */
-/*                ROUTES              */
+/*           ERROR HANDLER            */
 /* ********************************** */
-app.use('/ores', oreRoutes);
+api.use(errorHandler);
+
+/*
+ * Error handler middleware must be declared after all routes
+ * to allow it to catch errors thrown from any route.
+*/
 
 /* SERVE ~ */
-app.listen(PORT, () => {
+api.listen(PORT, () => {
   console.log(`API is listening on port: ${PORT}`);
 });

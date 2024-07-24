@@ -7,29 +7,98 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Ore {
-  id                Int                 @id @default(autoincrement())
-  name              String
-  type              String
-  description       String
-  hardness          Float
-  blastResistance   Float
-  toolRequired      String
-  minableWith       Json
-  drops             Drop[]
-  texture           String
-  color             String
+model Block {
+  id            Int           @id
+  name          String
+  displayName   String
+  hardness      Float
+  resistance    Float
+  stackSize     Int
+  diggable      Boolean
+  material      String
+  transparent   Boolean
+  emitLight     Int
+  filterLight   Int
+  defaultState  Int
+  minStateId    Int
+  maxStateId    Int
+  boundingBox   String
+  image         String?
+  states        Json?
+  drops         Json?
+  harvestTools  Json?
 
-  @@map("ores")
+  @@map("blocks")
 }
 
-model Drop {
-  id                Int     @id @default(autoincrement())
-  oreId             Int
-  item              String
+model Food {
+  id                Int           @id
+  name              String
+  stackSize         Int
+  displayName       String
+  image             String?
+  foodPoints        Int
+  saturation        Float
+  effectiveQuality  Float
+  saturationRatio   Float
+
+  @@map("foods")
+}
+
+model Biome {
+  id                Int           @id
+  name              String
+  category          String
+  temperature       Float
+  precipitation     String
+  dimension         String
+  displayName       String
+  color             Int
+  rainfall          Float
+
+  @@map("biomes")
+}
+
+model Entity {
+  id                Int           @id
+  internalId        Int
+  name              String
+  displayName       String
+  width             Float
+  height            Float
+  type              String
+  category          String
+
+  @@map("entities")
+}
+
+model Item {
+  id                Int           @id
+  name              String
+  displayName       String
+  image             String?
+  stackSize         Int
+  enchantCategories Json?
+  repairWith        Json?
+  maxDurability     Int?
+
+  @@map("items")
+}
+
+model Material {
+  id                String        @id
+  name              String
+  data              Json?
+
+  @@map("materials")
+}
+
+model Recipe {
+  id                Int           @id @default(autoincrement())
+  ingredients       Json?
+  recipe            Json?
+  result            Int
   quantity          Int
 
-  ore               Ore     @relation(fields: [oreId], references: [id])
-
-  @@map("drops")
+  @@map("recipes")
 }
