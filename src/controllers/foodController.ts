@@ -35,7 +35,7 @@ export const getFoodById = async (
     const numericId = Number(id);
 
     if (isNaN(numericId)) {
-      throw new ValidationError("Parameter must be a of type 'number'");
+      throw new ValidationError("Parameter must be of type 'number'");
     };
 
     const food = await getFoodByIdService(numericId);
