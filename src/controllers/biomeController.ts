@@ -42,8 +42,8 @@ export const getBiomeById = async (
     const biome = await getBiomeByIdService(numericId);
 
     if (!biome) {
-      return res.status(404).json({ message: "Biome not found" });
-    }
+      throw new NotFoundError("Biome not found.");
+    };
 
     res.json(biome);
   } catch (e) {

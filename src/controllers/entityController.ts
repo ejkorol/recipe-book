@@ -42,8 +42,8 @@ export const getEntityById = async (
     const entity = await getEntityByIdService(numericId);
 
     if (!entity) {
-      return res.status(404).json({ message: "Entity not found" });
-    }
+      throw new NotFoundError("Entity not found.");
+    };
 
     res.json(entity);
   } catch (e) {

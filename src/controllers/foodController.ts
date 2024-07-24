@@ -41,7 +41,7 @@ export const getFoodById = async (
     const food = await getFoodByIdService(numericId);
 
     if (!food) {
-      return res.status(404).json({ message: 'Food item not found' });
+      throw new NotFoundError("Food item not found.");
     };
 
     res.json(food);
