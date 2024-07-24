@@ -2,12 +2,22 @@
 
 An open-source API for managing recipes, built with Express and TypeScript using Prisma.
 
+# API Documentation
+
+#### Table of Contents
+- [Items](./docs/api/items.md)
+- [Blocks](./docs/api/blocks.md)
+- [Recipes](./docs/api/recipes.md)
+- [Foodstuffs](./docs/api/foods.md)
+- [Entities](./docs/api/entities.md)
+- [Biomes](./docs/api/biomes.md)
+
+
 #### Quick Nav
 - [Installation](#installation)
 - [Architecture](#project-structure)
 - [Running the Api](#development)
 - [API documentation](#api-documentation)
-
 
 ## Installation
 
@@ -206,9 +216,3 @@ $ npm run dev
 ```
 
 > Ensure that you have correctly performed the [Installation](#installation).
-
-# API Documentation
-
-#### Table of Contents
-- [Recipes](./docs/api/recipes.md)
-- [Foodstuffs](./docs/api/foods.md)
