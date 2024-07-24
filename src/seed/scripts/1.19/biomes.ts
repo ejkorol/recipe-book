@@ -10,7 +10,7 @@ const biomes = async (data: string) => {
           ...biome
         }
       });
-      console.log(`Successfully seeded: ${insertedBiome}`);
+      console.log(`Successfully seeded: ${insertedBiome.name}`);
     };
     console.info(`Completed: ${data}`);
   } catch (e: unknown) {

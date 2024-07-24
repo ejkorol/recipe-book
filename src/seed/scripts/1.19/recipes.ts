@@ -28,7 +28,10 @@ const recipes = async (data: string) => {
       }
     }
 
+    console.log(`\n`);
     console.info(`Completed: ${data}`);
+    console.log(`\n`);
+
   } catch (e: unknown) {
     if (e instanceof Error) {
       console.error(e.message);
