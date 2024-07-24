@@ -23,6 +23,7 @@ model Block {
   minStateId    Int
   maxStateId    Int
   boundingBox   String
+  image         String?
   states        Json?
   drops         Json?
   harvestTools  Json?
@@ -35,6 +36,7 @@ model Food {
   name              String
   stackSize         Int
   displayName       String
+  image             String?
   foodPoints        Int
   saturation        Float
   effectiveQuality  Float
@@ -74,6 +76,7 @@ model Item {
   id                Int           @id
   name              String
   displayName       String
+  image             String?
   stackSize         Int
   enchantCategories Json?
   repairWith        Json?
