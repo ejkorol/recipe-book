@@ -4,6 +4,8 @@ An open-source API for managing recipes, built with Express and TypeScript using
 
 # API Documentation
 
+> Currently supporting Minecraft PC (Java) **V.1.19**
+
 #### Table of Contents
 - [Items](./docs/api/items.md)
 - [Blocks](./docs/api/blocks.md)
