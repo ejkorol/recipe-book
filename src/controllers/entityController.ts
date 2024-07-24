@@ -7,25 +7,25 @@ import {
 } from "../utils/errors";
 
 import {
-  getAllBiomes as getAllBiomesService,
-  getBiomeById as getBiomeByIdService,
-  searchBiomes as searchBiomesService,
-} from "../services/biomeService";
+  getAllEntities as getAllEntitiesService,
+  getEntityById as getEntityByIdService,
+  getEntityBySearch as getEntityBySearchService,
+} from "../services/entityService";
 
-export const getAllBiomes = async (
+export const getAllEntities = async (
   _req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const biomes = await getAllBiomesService();
-    res.json(biomes);
+    const entities = await getAllEntitiesService();
+    res.json(entities);
   } catch (e) {
     next(handleError(e));
   }
 };
 
-export const getBiomeById = async (
+export const getEntityById = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -39,19 +39,19 @@ export const getBiomeById = async (
       throw new ValidationError("Parameter must be a of type 'number'");
     }
 
-    const biome = await getBiomeByIdService(numericId);
+    const entity = await getEntityByIdService(numericId);
 
-    if (!biome) {
-      return res.status(404).json({ message: "Biome not found" });
+    if (!entity) {
+      return res.status(404).json({ message: "Entity not found" });
     }
 
-    res.json(biome);
+    res.json(entity);
   } catch (e) {
     next(handleError(e));
   }
 };
 
-export const getBiomeBySearch = async (
+export const getEntityBySearch = async (
   req: Request,
   res: Response,
   next: NextFunction
@@ -60,16 +60,16 @@ export const getBiomeBySearch = async (
     const query = req.query.q as string;
 
     if (!query) {
-      throw new MissingParameterError("Query parameter 'q' is required.");
+      throw new MissingParameterError("Query parameter 'q' is required");
     }
 
-    const biomes = await searchBiomesService(query);
+    const entities = await getEntityBySearchService(query);
 
-    if (biomes.length === 0) {
-      throw new NotFoundError(`No biomes found with: ${query}`);
+    if (entities.length === 0) {
+      throw new NotFoundError(`No entities found with: ${query}`);
     }
 
-    res.json(biomes);
+    res.json(entities);
   } catch (e) {
     next(handleError(e));
   }
