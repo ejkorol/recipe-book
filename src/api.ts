@@ -52,3 +52,5 @@ api.use(errorHandler);
 api.listen(PORT, () => {
   console.log(`API is listening on port: ${PORT}`);
 });
+
+export default api;
