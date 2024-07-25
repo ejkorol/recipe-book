@@ -25,6 +25,8 @@ const api = express();
 /* ********************************** */
 
 /* ENABLE RATE LIMITER IN PROD */
+api.set('trust proxy', true);
+
 if (process.env.NODE_ENV === 'production') {
   api.use(apiLimiter);
 };

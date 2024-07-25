@@ -7,10 +7,12 @@ const convertTime = (milliseconds: number) => {
 };
 
 const windowMs = 15 * 60 * 1000;
-const maxRequests = 100;
+const limit = 100;
 
 export const apiLimiter = rateLimit({
   windowMs,
-  max: maxRequests,
-  message: `Limit: ${maxRequests} requests every ${convertTime(windowMs)}`
+  limit,
+  standardHeaders: true,
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  message: `Limit: ${limit} requests every ${convertTime(windowMs)}`
 });
