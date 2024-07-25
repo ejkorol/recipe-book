@@ -2,12 +2,13 @@
   "name": "recipe-book",
   "version": "1.0.0",
   "description": "An open-source Minecraft API",
-  "main": "dist/src/api.js",
+  "main": "api/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/src/api.js",
-    "dev": "nodemon src/api.ts",
-    "seed": "ts-node ./src/seed/seed.ts"
+    "start": "ts-node api/index.ts",
+    "dev": "ts-node api/index.ts",
+    "seed": "ts-node ./src/seed/seed.ts",
+    "vercel-build": "echo booted"
   },
   "dependencies": {
     "@prisma/client": "^5.17.0",
