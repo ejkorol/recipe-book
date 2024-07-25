@@ -1,7 +1,7 @@
-import { Router } from "express";
+import { Router } from 'express';
 
-import path from "path";
-import fs from "fs";
+import path from 'path';
+import fs from 'fs';
 
 /* ROUTER INSTANCE */
 const router = Router();
@@ -14,11 +14,11 @@ const router = Router();
  * `./src/api.ts` then imports whatever is generated.
  */
 
-const routesDir = __dirname;
+const routesDir = __dirname
 
 fs.readdirSync(routesDir).forEach(file => {
-  if (file !== 'index.ts' && (file.endsWith('.ts') || file.endsWith('.js'))) {
-    const routePath = `/api/${file.replace('.ts', '').replace(/Routes$/, '').toLowerCase()}`;
+  if (file !== 'index.js' && (file.endsWith('.ts') || file.endsWith('.js'))) {
+    const routePath = `/api/${file.replace('.ts', '').replace('.js', '').replace(/Routes$/, '').toLowerCase()}`;
 
     try {
       const routeModule = require(path.join(routesDir, file));
@@ -28,11 +28,11 @@ fs.readdirSync(routesDir).forEach(file => {
         console.info(`Registered: ${routePath}`);
       } else {
         console.error(`No default export found in ${file}`);
-      };
+      }
     } catch (error) {
       console.error(`Failed to load route from ${file}:`, error);
-    };
-  };
+    }
+  }
 });
 
 export default router;
