@@ -2,7 +2,7 @@
   "name": "recipe-book",
   "version": "1.0.0",
   "description": "An open-source Minecraft API",
-  "main": "src/api.ts",
+  "main": "api/index.ts",
   "scripts": {
     "build": "tsc",
     "start": "ts-node src/api.ts",
