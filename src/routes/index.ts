@@ -14,10 +14,10 @@ const router = Router();
  * `./src/api.ts` then imports whatever is generated.
  */
 
-const routesDir = __dirname
+const routesDir = path.resolve(__dirname);
 
 fs.readdirSync(routesDir).forEach(file => {
-  if (file !== 'index.js' && (file.endsWith('.ts') || file.endsWith('.js'))) {
+  if (file !== 'index.js' && file !== 'index.ts' && (file.endsWith('.ts') || file.endsWith('.js'))) {
     const routePath = `/api/${file.replace('.ts', '').replace('.js', '').replace(/Routes$/, '').toLowerCase()}`;
 
     try {
