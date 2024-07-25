@@ -24,15 +24,15 @@ const api = express();
 /*              MIDDLEWARE            */
 /* ********************************** */
 
+/* CORS W/ DEFAULT */
+api.use(cors({ origin: '*' }));
+
 /* ENABLE RATE LIMITER IN PROD */
 api.set('trust proxy', true);
 
 if (process.env.NODE_ENV === 'production') {
   api.use(apiLimiter);
 };
-
-/* CORS W/ DEFAULT */
-api.use(cors());
 
 api.use(express.json());
 api.use(express.static('public'));
